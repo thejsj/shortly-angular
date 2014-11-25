@@ -1,8 +1,9 @@
 angular.module('shortly.services', [])
 
-.factory('Links', function ($http) {
+.factory('Links', function ($http, $filter) {
   // Your code here
   var links = {};
+  var orderBy = $filter('orderBy');
 
   links.data = [];
 
@@ -13,7 +14,7 @@ angular.module('shortly.services', [])
     })
     .then(function (resp) {
       links.data.links = resp.data;
-      console.log(links.data.links);
+      links.order();
       return links.data;
     });
   };
@@ -29,8 +30,13 @@ angular.module('shortly.services', [])
     .then(function (resp) {
       link.val = '';
       links.data.push(resp);
+      links.order();
       return resp;
     });
+  };
+
+  links.order = function() {
+    links.data.links = orderBy(links.data.links, 'visits', true);
   };
 
   return links;
