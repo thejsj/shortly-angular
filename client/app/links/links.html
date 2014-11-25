@@ -5,16 +5,13 @@
         <span class="input-group-addon">Search</span>
         <input type="text" class="form-control" placeholder="Google" ng-model='filterQuery'>
       </div>
-
       <ul class='list-group'>
-        <a
+        <a shortened-link
           class='list-group-item'
           href='/{{ entry.code }}'
-          ng-repeat='entry in data.links | filter:filterQuery'
-          target='_blank'
+          ng-click='getLinks()'
+          target='_blank'ng-repeat='entry in data.links | filter:filterQuery'
         >
-          <span class="badge">{{entry.visits}}</span>
-          {{ entry.title }}
         </a>
       </ul>
     </div>

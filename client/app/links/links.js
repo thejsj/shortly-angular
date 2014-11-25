@@ -7,4 +7,10 @@ angular.module('shortly.links', [])
   angular.extend($scope, Links);
   $scope.getLinks()
     .then();
+})
+.directive('shortenedLink', function() {
+  return {
+    restrict: 'A',
+    templateUrl: 'app/links/shortened-link.html'
+  };
 });
