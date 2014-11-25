@@ -5,4 +5,17 @@ angular.module('shortly.shorten', [])
   $scope.link = {
     val: ''
   }; // Is this value the same a what's currently in ng-model='link'
+
+  // $scope.checkLink = function (link) {
+  //   if (true) {
+  //     $scope.addLink(link);
+  //   } else {
+  //     $scope.showErrors();
+  //   }
+  // };
+
+  // $scope.showErrors = function () {
+
+  // };
+
 });
