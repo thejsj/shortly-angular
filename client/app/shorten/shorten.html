@@ -3,7 +3,7 @@
     <div class='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
       <div class='panel panel-default'>
         <div class="panel-heading">
-          <h3 class='panel-title'>Shorten</h3>
+          <h3 class='panel-title'>Shorten URL</h3>
         </div>
         <div class='panel-body'>
            <form name='shortenForm'>
@@ -11,13 +11,12 @@
                <div class="form-group"
                ng-class='{"has-error": shortenForm.linkInput.$dirty && shortenForm.linkInput.$invalid}'
                >
-                 <label for="linkInput">URL</label>
                  <input placeholder='http://www.google.com' type="url" ng-model='link.val' name='linkInput' class="form-control" id="inputError1">
                  <div
                  class='error-div'
                  ng-class='{show: shortenForm.linkInput.$dirty && shortenForm.linkInput.$invalid}'
                  >
-                   <p>Invalid</p>
+                   <p>Please enter a valid URL (http://www.google.com)</p>
                  </div>
                </div>
              <div>

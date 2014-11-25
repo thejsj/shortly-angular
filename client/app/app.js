@@ -17,8 +17,8 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     .when('/', {
-      templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      templateUrl: 'app/auth/signin.html',
+      controller: 'AuthController'
     })
     .when('/links', {
       templateUrl: 'app/links/links.html',
