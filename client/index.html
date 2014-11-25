@@ -3,21 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <title>Shortly</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body>
-    <h1>Shortly</h1>
+    <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Shortly</a>
+          </div>
 
-    <!-- the ng-view directive is where our templates will be loaded into when naviagted to -->
-    <div ng-view></div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div>
+            <ul class="nav navbar-nav navbar-left">
+              <li><a href="/#/links">All Links</a></li>
+              <li><a href="/#/shorten">Shorten Link</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/#/signin">Sign In</a></li>
+              <li><a href="/#/signup">Sign Up</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
 
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
+      <!-- the ng-view directive is where our templates will be loaded into when naviagted to -->
+      <div ng-view></div>
 
-    <script src="app/auth/auth.js"></script>
-    <script src="app/links/links.js"></script>
-    <script src="app/shorten/shorten.js"></script>
-    <script src="app/services/services.js"></script>
-    <script src="app/app.js"></script>
+      <script src="lib/angular/angular.js"></script>
+      <script src="lib/angular-route/angular-route.js"></script>
+
+      <script src="app/auth/auth.js"></script>
+      <script src="app/links/links.js"></script>
+      <script src="app/shorten/shorten.js"></script>
+      <script src="app/services/services.js"></script>
+      <script src="app/app.js"></script>
+    </div>
   </body>
 </html>

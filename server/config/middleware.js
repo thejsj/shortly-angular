@@ -1,7 +1,8 @@
 var morgan      = require('morgan'), // used for logging incoming request
     bodyParser  = require('body-parser'),
-    helpers     = require('./helpers.js'); // our custom middleware
-
+    helpers     = require('./helpers.js'), // our custom middleware
+    path        = require('path'),
+    linksController = require('../links/linkController.js');
 
 module.exports = function (app, express) {
   // Express 4 allows us to use multiple routers with their own configurations
@@ -12,7 +13,6 @@ module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../../client'));
-
 
   app.use('/api/users', userRouter); // use user router for all user request
 
@@ -25,4 +25,10 @@ module.exports = function (app, express) {
   // inject our routers into their respective route files
   require('../users/userRoutes.js')(userRouter);
   require('../links/linkRoutes.js')(linkRouter);
+
+  // We have no idea why this works
+  // It seemed to be designed to work in the linkRoutes,
+  // but that wan't properly adding our code param
+  app.param('code', linksController.findUrl);
+  app.get('/:code', linksController.navToLink);
 };

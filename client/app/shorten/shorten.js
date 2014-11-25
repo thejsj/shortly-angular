@@ -1,5 +1,8 @@
 angular.module('shortly.shorten', [])
 
 .controller('ShortenController', function ($scope, $location, Links) {
-  // Your code here
+  angular.extend($scope, Links);
+  $scope.link = {
+    val: ''
+  }; // Is this value the same a what's currently in ng-model='link'
 });

@@ -21,20 +21,19 @@ module.exports = {
   },
 
   allLinks: function (req, res, next) {
-  var findAll = Q.nbind(Link.find, Link);
+    var findAll = Q.nbind(Link.find, Link);
 
-  findAll({})
-    .then(function (links) {
-      res.json(links);
-    })
-    .fail(function (error) {
-      next(error);
-    });
+    findAll({})
+      .then(function (links) {
+        res.json(links);
+      })
+      .fail(function (error) {
+        next(error);
+      });
   },
 
   newLink: function (req, res, next) {
     var url = req.body.url;
-    console.log(req.body);
     if (!util.isValidUrl(url)) {
       return next(new Error('Not a valid url'));
     }
