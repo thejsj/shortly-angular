@@ -154,3 +154,7 @@ input[type=url]:focus {
 .error-div.show {
   opacity: 1;
 }
+
+.links-controller .input-group {
+  margin-bottom: 1em;
+}
