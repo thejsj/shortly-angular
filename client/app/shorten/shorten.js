@@ -8,4 +8,11 @@ angular.module('shortly.shorten', [])
   $scope.link = {
     val: ''
   };
+
+  $scope.submitLink = function (link) {
+    $scope.addLink(link)
+    .then(function () {
+      $location.path('/links');
+    })
+  }
 });

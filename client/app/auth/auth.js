@@ -4,6 +4,9 @@
 angular.module('shortly.auth', [])
 
 .controller('AuthController', function ($scope, $window, $location, Auth) {
+
+  if (Auth.isAuth()) $location.path('/links');
+
   $scope.user = {};
 
   $scope.signin = function () {
@@ -27,4 +30,12 @@ angular.module('shortly.auth', [])
         console.error(error);
       });
   };
+})
+
+.controller('AuthNavBarController', function ($scope, Auth) {
+
+  angular.extend($scope, Auth);
+
+
+
 });
