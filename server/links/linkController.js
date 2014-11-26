@@ -1,7 +1,7 @@
 var Link    = require('./linkModel.js'),
     Q       = require('q'),
-    util    = require('../config/utils.js');
-
+    util    = require('../config/utils.js'),
+    jwt  = require('jwt-simple');
 
 module.exports = {
   findUrl: function (req, res, next, code) {
@@ -21,9 +21,13 @@ module.exports = {
   },
 
   allLinks: function (req, res, next) {
+    var token = req.body.token;
+    console.log('token');
+    console.log(token);
+    var user = jwt.decode(token, 'secret');
     var findAll = Q.nbind(Link.find, Link);
 
-    findAll({})
+    findAll({where: {userId: user._id}})
       .then(function (links) {
         res.json(links);
       })
@@ -34,10 +38,12 @@ module.exports = {
 
   newLink: function (req, res, next) {
     var url = req.body.url;
+    var token = req.body.token;
     if (!util.isValidUrl(url)) {
       return next(new Error('Not a valid url'));
     }
 
+    var user = jwt.decode(token, 'secret');
     var createLink = Q.nbind(Link.create, Link);
     var findLink = Q.nbind(Link.findOne, Link);
 
@@ -55,7 +61,8 @@ module.exports = {
             url: url,
             visits: 0,
             base_url: req.headers.origin,
-            title: title
+            title: title,
+            userId: user._id
           };
           return createLink(newLink);
         }

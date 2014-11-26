@@ -1,6 +1,6 @@
 angular.module('shortly.services', [])
 
-.factory('Links', function ($http, $filter) {
+.factory('Links', function ($http, $filter, Auth) {
   // Your code here
   var links = {};
   var orderBy = $filter('orderBy');
@@ -10,7 +10,10 @@ angular.module('shortly.services', [])
   links.getLinks = function () {
     return $http({
       method: 'GET',
-      url: '/api/links'
+      url: '/api/links',
+      data: {
+        token: Auth.getToken()
+      }
     })
     .then(function (resp) {
       links.data.links = resp.data;
@@ -24,7 +27,8 @@ angular.module('shortly.services', [])
       method: 'POST',
       url: '/api/links',
       data: {
-        url: link.val
+        url: link.val,
+        token: Auth.getToken()
       }
     })
     .then(function (resp) {
@@ -49,6 +53,7 @@ angular.module('shortly.services', [])
   // that JWT is then stored in localStorage as 'com.shortly'
   // after you signin/signup open devtools, click resources,
   // then localStorage and you'll see your token from the server
+
   var signin = function (user) {
     return $http({
       method: 'POST',
@@ -56,6 +61,7 @@ angular.module('shortly.services', [])
       data: user
     })
     .then(function (resp) {
+      console.log(resp.data);
       return resp.data.token;
     });
   };
@@ -75,6 +81,10 @@ angular.module('shortly.services', [])
     return !!$window.localStorage.getItem('com.shortly');
   };
 
+  var getToken = function () {
+    return $window.localStorage.getItem('com.shortly');
+  };
+
   var signout = function () {
     $window.localStorage.removeItem('com.shortly');
     $location.path('/signin');
@@ -85,6 +95,7 @@ angular.module('shortly.services', [])
     signin: signin,
     signup: signup,
     isAuth: isAuth,
+    getToken: getToken,
     signout: signout
   };
 });
